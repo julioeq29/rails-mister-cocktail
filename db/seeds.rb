@@ -19,4 +19,11 @@ Ingredient.create(name: "pepermint")
 Ingredient.create(name: "olives")
 Ingredient.create(name: "basil")
 
+Cocktail.create(name: "Gin & Tonic")
+Cocktail.create(name: "Mojito Loquito")
+Cocktail.create(name: "Uno pasito pa lante tequila")
+Cocktail.create(name: "Vodka Rose")
+Cocktail.create(name: "Cubata Dudoso")
+
+
 puts "Done, go drink and have fun"
