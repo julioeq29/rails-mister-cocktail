@@ -5,6 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
+require 'json'
+
+url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+
 
 puts "Destroying database..."
 
@@ -12,18 +17,29 @@ Ingredient.destroy_all
 
 puts "Creating fake ingredients..."
 
-Ingredient.create(name: "lemon")
-Ingredient.create(name: "ice")
-Ingredient.create(name: "mint leaves")
-Ingredient.create(name: "pepermint")
-Ingredient.create(name: "olives")
-Ingredient.create(name: "basil")
-
-Cocktail.create(name: "Gin & Tonic")
-Cocktail.create(name: "Mojito Loquito")
-Cocktail.create(name: "Uno pasito pa lante tequila")
-Cocktail.create(name: "Vodka Rose")
-Cocktail.create(name: "Cubata Dudoso")
-
+ingredients_serialized = open(url).read
+ingredients = JSON.parse(ingredients_serialized)
+ingredients['drinks'].each do |ingredient|
+  Ingredient.create(name: ingredient['strIngredient1'])
+end
 
 puts "Done, go drink and have fun"
+
+
+
+
+# Ingredient.create(name: "lemon")
+# Ingredient.create(name: "ice")
+# Ingredient.create(name: "mint leaves")
+# Ingredient.create(name: "pepermint")
+# Ingredient.create(name: "olives")
+# Ingredient.create(name: "basil")
+
+# Cocktail.create(name: "Gin & Tonic")
+# Cocktail.create(name: "Mojito Loquito")
+# Cocktail.create(name: "Uno pasito pa lante tequila")
+# Cocktail.create(name: "Vodka Rose")
+# Cocktail.create(name: "Cubata Dudoso")
+
+
+
